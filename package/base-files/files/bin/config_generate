@@ -241,8 +241,9 @@ generate_static_system() {
 	uci -q batch <<-EOF
 		delete system.@system[0]
 		add system system
-		set system.@system[-1].hostname='OpenWrt'
-		set system.@system[-1].timezone='UTC'
+		set system.@system[-1].hostname='NETGEAR_WNDR4300v2'
+		set system.@system[-1].timezone='CST-8'
+		set system.@system[-1].timezone='Asia/Shanghai'
 		set system.@system[-1].ttylogin='0'
 		set system.@system[-1].log_size='64'
 		set system.@system[-1].urandom_seed='0'
@@ -255,6 +256,7 @@ generate_static_system() {
 		add_list system.ntp.server='1.openwrt.pool.ntp.org'
 		add_list system.ntp.server='2.openwrt.pool.ntp.org'
 		add_list system.ntp.server='3.openwrt.pool.ntp.org'
+		add_list system.ntp.server='4.ntp.aliyun.com'
 	EOF
 
 	if json_is_a system object; then
