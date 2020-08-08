@@ -13,8 +13,8 @@ on:
   push:
     branches: 
       - wndr4300v2
-  # schedule:
-  #   - cron: 0 20 * * *
+    schedule:
+      - cron: 0 0 * * *
   # release:
   #   types: [published]
 
