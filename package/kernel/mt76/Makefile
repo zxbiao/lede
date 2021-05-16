@@ -1,16 +1,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mt76
-PKG_RELEASE=2
+PKG_RELEASE=3
 
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=
 
 PKG_SOURCE_URL:=https://github.com/openwrt/mt76
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_DATE:=2020-07-22
-PKG_SOURCE_VERSION:=b5df0fbb1847a51f0a11f03a3fa8dc9d98d4df82
-PKG_MIRROR_HASH:=70aca7f8912b89af975c7b63fdf25d41be831c434e0c991fcbdaa60127d4acd5
+PKG_SOURCE_DATE:=2020-12-18
+PKG_SOURCE_VERSION:=4a90fdf6105e1517897aac1b451b73a54b3d9d0d
+PKG_MIRROR_HASH:=1ea778584d0fabbc75eb3b2f42aba0c0f2f5e6f0f5ae3084c17b9f02876ebdcc
 
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 PKG_BUILD_PARALLEL:=1
@@ -333,6 +333,7 @@ define KernelPackage/mt76x2u/install
 	$(INSTALL_DIR) $(1)/lib/firmware/mediatek
 	ln -sf ../mt7662.bin $(1)/lib/firmware/mediatek/mt7662u.bin
 	ln -sf ../mt7662_rom_patch.bin $(1)/lib/firmware/mediatek/mt7662u_rom_patch.bin
+	echo mt76-usb disable_usb_sg=1 > $(1)/etc/modules.d/mt76-usb
 endef
 
 define KernelPackage/mt7603/install

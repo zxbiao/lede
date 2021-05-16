@@ -44,14 +44,16 @@ ipq40xx_setup_interfaces()
 		;;
 	asus,rt-acrh17|\
 	asus,rt-ac58u|\
-	p2w,r619ac-128m|\
 	p2w,r619ac|\
+	p2w,r619ac-128m|\
 	zyxel,nbg6617)
 		ucidef_set_interfaces_lan_wan "eth0" "eth1"
 		ucidef_add_switch "switch0" \
 			"0u@eth0" "1:lan:4" "2:lan:3" "3:lan:2" "4:lan:1"
 		;;
 	avm,fritzbox-4040|\
+	century,wr142ac|\
+	century,wr142ac-nand|\
 	linksys,ea6350v3|\
 	linksys,ea8300)
 		ucidef_set_interfaces_lan_wan "eth0" "eth1"
@@ -82,6 +84,11 @@ ipq40xx_setup_interfaces()
 		ucidef_set_interfaces_lan_wan "eth0" "eth1"
 		ucidef_add_switch "switch0" \
 			"0u@eth0" "3:lan" "4:lan"
+		;;
+	hiwifi,c526a)
+		ucidef_set_interfaces_lan_wan "eth0" "eth1"
+		ucidef_add_switch "switch0" \
+			"0u@eth0" "2:lan" "3:lan" "4:lan"
 		;;
 	mobipromo,cm520-79f)
 		ucidef_add_switch "switch0" \
@@ -146,6 +153,11 @@ ipq40xx_setup_macs()
 		;;
 	ezviz,cs-w3-wd1200g-eup)
 		label_mac=$(mtd_get_mac_binary "ART" 0x6)
+		;;
+	hiwifi,c526a)
+		lan_mac=$(mtd_get_mac_ascii bdinfo "Vfac_mac ")
+		label_mac=$lan_mac
+		wan_mac=$(macaddr_add "$lan_mac" 1)
 		;;
 	linksys,ea6350v3)
 		wan_mac=$(mtd_get_mac_ascii devinfo hw_mac_addr)
